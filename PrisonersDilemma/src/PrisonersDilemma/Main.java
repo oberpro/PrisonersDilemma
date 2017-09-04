@@ -21,6 +21,8 @@ public class Main {
 			new TheRandomGuy(),
 			new TheConsequentGuy(),
 			new TheConsequentGuy(),
+			new TheConsequentGuy(),
+			new TheConsequentGuy(),
 		};
 		
 		
@@ -35,13 +37,17 @@ public class Main {
 		Arrays.sort(candidates, new Comparator<PrisonerWithPoints>(){
 			@Override
 			public int compare(PrisonerWithPoints p1, PrisonerWithPoints p2) {
-				return (p1.score - p2.score);
+				return (p2.score - p1.score);
 			}
 		});
 		
 		for(int i = 0; i<candidates.length; i++){
-			System.out.println(candidates[i].prisoner.getClass().getSimpleName() + " " + candidates[i].score);
+			System.out.println(padRight("#" + (i + 1), 5) + " " + padRight(candidates[i].prisoner.getClass().getSimpleName(), 20) + " " + candidates[i].score);
 		}
+	}
+	
+	public static String padRight(String string, int spaces) {
+		return String.format("%1$-" + spaces + "s", string);  
 	}
 	
 	public static void tournament(PrisonerWithPoints[] candidates){
