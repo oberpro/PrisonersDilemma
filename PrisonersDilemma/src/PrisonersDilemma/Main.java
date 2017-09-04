@@ -12,10 +12,11 @@ import ExampleStrategies.TheGoodGuy;
 import ExampleStrategies.TheRandomGuy;
 
 public class Main {
-	public static Random rand = new Random();
-	public static PrisonersStrategy[] strats;
+	private static Random rand = new Random();
+	private static Random seedGenerator = new Random();
+	private static PrisonersStrategy[] strats;
 	
-	public static void recreateStrats(){
+	private static void recreateStrats(){
 		PrisonersStrategy[] strats = {
 				new TheBadGuy(),
 				new TheGoodGuy(),
@@ -53,11 +54,11 @@ public class Main {
 		}
 	}
 	
-	public static String padRight(String string, int spaces) {
+	private static String padRight(String string, int spaces) {
 		return String.format("%1$-" + spaces + "s", string);  
 	}
 	
-	public static void tournament(PrisonerWithPoints[] candidates){
+	private static void tournament(PrisonerWithPoints[] candidates){
 		for(int i = 0; i<candidates.length; i++){
 			for(int k = i + 1; k<candidates.length; k++){
 				fight(candidates[i], candidates[k]);
@@ -68,7 +69,7 @@ public class Main {
 		}
 	}
 	
-	public static void fight(PrisonerWithPoints p1, PrisonerWithPoints p2){
+	private static void fight(PrisonerWithPoints p1, PrisonerWithPoints p2){
 		/*System.out.println("Fight start of...");
 		System.out.println(p1.prisoner.getClass().getSimpleName());
 		System.out.println(p2.prisoner.getClass().getSimpleName());
@@ -88,6 +89,9 @@ public class Main {
 				p1Choices.toArray(arrP1Choices);
 				p2Choices.toArray(arrP2Choices);
 				
+				rand.setSeed(seedGenerator.nextLong());
+				rand.nextLong(); rand.nextLong(); rand.nextLong();
+				
 				p1Choice = p1.prisoner.turn(arrP1Choices, arrP2Choices, rand);
 			}
 			
@@ -97,6 +101,9 @@ public class Main {
 
 				p1Choices.toArray(arrP1Choices);
 				p2Choices.toArray(arrP2Choices);
+				
+				rand.setSeed(seedGenerator.nextLong());
+				rand.nextLong(); rand.nextLong(); rand.nextLong();
 				
 				p2Choice = p2.prisoner.turn(arrP2Choices, arrP1Choices, rand);
 			}
