@@ -13,17 +13,24 @@ import ExampleStrategies.TheRandomGuy;
 
 public class Main {
 	public static Random rand = new Random();
+	public static PrisonersStrategy[] strats;
+	
+	public static void recreateStrats(){
+		PrisonersStrategy[] strats = {
+				new TheBadGuy(),
+				new TheGoodGuy(),
+				new TheRandomGuy(),
+				new TheConsequentGuy(),
+				new TheConsequentGuy(),
+				new TheConsequentGuy(),
+				new TheConsequentGuy(),
+			};
+		
+		Main.strats = strats;
+	}
 	
 	public static void main(String[] args) {
-		PrisonersStrategy[] strats = {
-			new TheBadGuy(),
-			new TheGoodGuy(),
-			new TheRandomGuy(),
-			new TheConsequentGuy(),
-			new TheConsequentGuy(),
-			new TheConsequentGuy(),
-			new TheConsequentGuy(),
-		};
+		recreateStrats();
 		
 		
 		
@@ -54,6 +61,9 @@ public class Main {
 		for(int i = 0; i<candidates.length; i++){
 			for(int k = i + 1; k<candidates.length; k++){
 				fight(candidates[i], candidates[k]);
+				recreateStrats();						//Perhaps a little wasteful?
+				candidates[i].prisoner = strats[i];
+				candidates[k].prisoner = strats[k];
 			}
 		}
 	}
