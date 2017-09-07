@@ -10,6 +10,7 @@ import ExampleStrategies.TheBadGuy;
 import ExampleStrategies.TheConsequentGuy;
 import ExampleStrategies.TheGoodGuy;
 import ExampleStrategies.TheRandomGuy;
+import ExampleStrategies.TheSmartGuy;
 
 public class Main {
 	private static Random rand = new Random();
@@ -22,9 +23,7 @@ public class Main {
 				new TheGoodGuy(),
 				new TheRandomGuy(),
 				new TheConsequentGuy(),
-				new TheConsequentGuy(),
-				new TheConsequentGuy(),
-				new TheConsequentGuy(),
+				new TheSmartGuy()
 			};
 		
 		Main.strats = strats;
